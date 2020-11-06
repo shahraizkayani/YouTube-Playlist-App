@@ -1,0 +1,34 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Youtube PlayList Time Calculator</title>
+    <link href="/Content/Site.css" rel="stylesheet" type="text/css" />
+    <link href="/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <script src="/Scripts/modernizr-2.8.3.js"></script>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand navbar-light bg-info">
+        @Html.ActionLink("YouTube PlayList Time Calculator", "Index", "Home", new { area = "" }, new { @class = "navbar-brand white" })
+
+
+    </nav>
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <h4 class="text-center">Written and Coded By <a class="btn-link" href="https://codepen.io/Shahraiz"> Shahraiz Kayani</a></h4>
+
+
+        </footer>
+    </div>
+
+    <script src="~/Scripts/jquery-3.5.1.slim.min.js"></script>
+    <script src="/Scripts/umd/popper.min.js"></script>
+    <script src="/Scripts/bootstrap.min.js"></script>
+    <script src="/Scripts/jquery-3.5.1.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,138 @@
+﻿
+@{
+    ViewBag.Title = "YouTube PlayList App Calculator";
+}
+<style>
+
+    loader {
+        border: 16px solid indigo;
+        border-radius: 50%;
+        border-top: 16px solid purple;
+        width: 200px;
+        height: 200px;
+        animation: spin 5s linear infinite;
+        animation-direction: alternate;
+        margin-left: 50%;
+    }
+
+    @@keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+</style>
+<br />
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+
+            <h3 class="text-info">   Instructions </h3>
+            <ol class="text-justify">
+                <li class="text-justify"> Go to any of your favourite  Youtube playlist and copy Id.</li>
+                <li class="text-justify">
+                    Example from this url
+                    https://www.youtube.com/playlist?list=PLWKjhJtqVAbkmRvnFmOd4KhDdlK1oIq23
+                    <br />
+                    Paste PLWKjhJtqVAbkmRvnFmOd4KhDdlK1oIq23 in above text box and click calculate button
+                    to Get total time of all videos in playlist.
+                </li>
+            </ol>
+            <h3 class="text-info">
+                Skip Option
+            </h3>
+            <ol class="text-justify">
+                <li class="text-justify"> Extra Feature That will skip first n number of values.</li>
+                <li class="text-justify"> Example There are 50 videos and you enter skip value 40. Then It will count time from 41-50</li>
+            </ol>
+            <h3 class="text-danger">
+                Limitations
+            </h3>
+            <ol class="text-justify">
+                <li class="text-justify">
+                    This appliction only calculates time of first 100 videos in playlist.
+                </li>
+            </ol>
+
+
+        </div>
+        <div class="col-md-6">
+            <form method="get" action="~/Home/GetTime">
+                <div class="form-group">
+                    <label class="text-info" for="url"> Playlist Id</label>
+                    <input type="text" name="url" id="url" required class="form-control" />
+
+                </div>
+                <div class="form-group">
+                    <label class="text-info" for="url"> Skip  Value</label>
+                    <input type="text" name="min" id="min" min="0" max="99" required class="form-control" />
+
+                </div>
+                <br />
+                <button class="btn btn-info" type="button" id="btncalculator">Calculate Time</button>
+
+            </form>
+            <br />
+            <div id="loader">
+
+            </div>
+            <div id="divresult">
+
+            </div>
+        </div>
+
+    </div>
+</div>
+<br />
+
+<script src="~/Scripts/jquery-3.5.1.min.js"></script>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+
+        $('#btncalculator').click(function () {
+
+            $('#divresult').empty();
+            $('#loader').addClass('loader2');
+            GetData();
+
+        });
+
+        function GetData() {
+
+            $.ajax({
+                url: "/Home/GetTime",
+                data: { url: $('#url').val(), min: $('#min').val() },
+                method: "get",
+                dataType: 'text',
+                success: function (data) {
+                    var randomcolor = '#' + (Math.random() * 0xFFFFFF << 0).toString(16);
+                    //   $('body').css('background-color', randomcolor);
+                    $('#loader').removeClass('loader2');
+                    $("#divresult").html("<h3 class='text-info'>" + data + " </h3>");
+
+
+                },
+                error: function (err) {
+                    $('#loader').removeClass('loader2');
+
+                    $("#divresult").html("<h3 class='text-danger'>Try Again Something Went Wrong</h3>");
+                }
+
+
+
+
+            });
+
+
+        }
+
+
+
+    });
+
+</script>
