@@ -45,7 +45,7 @@ namespace Youtube_Playlist_App.Controllers
             {
                 var html = new WebClient().DownloadString("https://www.youtube.com/playlist?list=" + url.Trim());
 
-                string value = GetBetween(html, @"window[""ytInitialData""] = ", @"window[""ytInitialPlayerResponse""]");
+                string value = GetBetween(html, @"ytInitialData = ", @"</script>");
 
                 JObject parsed = JObject.Parse(value);
 
@@ -81,11 +81,12 @@ namespace Youtube_Playlist_App.Controllers
 
             private static string GetBetween(string content, string startString, string endString)
             {
-                if (content.Contains(startString) && content.Contains(endString))
+            //|| content.Contains(endString)
+            if (content.Contains(startString) && content.Contains(endString))
                 {
                     int Start = content.IndexOf(startString, 0) + startString.Length;
                     int End = content.IndexOf(endString, Start);
-                    return content.Substring(Start, (End - 6) - Start);
+                    return content.Substring(Start, (End - 1) - Start);
                 }
                 else
                     return string.Empty;
