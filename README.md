@@ -26,7 +26,7 @@ It Scrapes Total time from YouTube Vidoes in Playlist.
 
 ## Uploaded on Somee
 
-- [PlayList App Created By Shahraiz Kayani](http://www.youtubeplaylistapp.somee.com/)
+- [PlayList App Created By Shahraiz Kayani](https://www.youtubeplaylistapp.somee.com/)
 
 
 ![Demo](Demo.png)
